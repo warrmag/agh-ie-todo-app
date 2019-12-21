@@ -1,0 +1,6 @@
+[submodule "backend"]
+	path = backend
+	url = git@github.com:warrmag/agh-ie-app-backend.git
+[submodule "frontend"]
+	path = frontend
+	url = git@github.com:warrmag/agh-ie-app-frontend.git
