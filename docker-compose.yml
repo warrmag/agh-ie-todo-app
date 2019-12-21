@@ -1,0 +1,55 @@
+version: '3'
+services:
+
+  frontend:
+    container_name: agh-pass-frontend
+    build:
+      context: .
+      dockerfile: Docker/Dockerfile
+    volumes:
+      - './frontend/:/app'
+      - '/app/node_modules'
+    ports:
+      - '4200:4200'
+  web:
+    container_name: todo-app-web
+    image: nginx:latest
+    ports:
+      - "8083:80"
+    volumes:
+      - ./backend:/app
+      - ./backend/vendor:/app/vendor
+      - ./var/container/log:/var/log/nginx
+      - ./docker/nginx/app.conf:/etc/nginx/conf.d/app.conf
+    links:
+      - php
+    depends_on:
+      - postgres
+    tty: true
+    networks:
+      - default
+    env_file:
+      - .env
+  php:
+    container_name: todo-app-php
+    build: docker/php
+    volumes:
+      - ./backend:/app
+      - ./var/container/log:/tmp/xdebug.log
+    tty: true
+    dns: 8.8.8.8
+    networks:
+      - default
+    env_file:
+      - .env
+  postgres:
+    image: postgres
+    container_name: app-postgres-todos
+    environment:
+      - POSTGRES_USER=${DB_ROOT_USER}
+      - POSTGRES_PASSWORD=${DB_ROOT_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+    ports:
+      - 5432:${DB_PORT}
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
