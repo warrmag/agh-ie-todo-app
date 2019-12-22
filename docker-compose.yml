@@ -6,6 +6,8 @@ services:
     build: docker/node
     volumes:
       - ./frontend:/app
+    networks:
+      - default
     ports:
       - '4200:4200'
   web:

@@ -11,12 +11,12 @@ RUN chmod +x /entrypoint.sh
 # set working directory
 WORKDIR /app
 
-RUN npm install -g @angular/cli@latest -vv
-
 # ADD NODE TO SUDOERS
 RUN usermod -aG sudo node && echo "node ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 RUN sudo chown -R node:node /app
+
+RUN yarn global add @angular/cli@latest
 
 USER node
 
