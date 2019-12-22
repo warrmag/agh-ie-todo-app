@@ -34,11 +34,12 @@ RUN composer global require hirak/prestissimo --prefer-dist
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod 777 /entrypoint.sh
 
-RUN chown 1000:1000 -R /var/www && chmod 777 -R /var/www/
+WORKDIR /app
+
+RUN chown 1000:1000 -R /app
 
 USER 1000
 
 ENTRYPOINT ["/entrypoint.sh"]
 
-WORKDIR /app
 CMD ["php-fpm"]
