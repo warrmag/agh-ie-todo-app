@@ -6,10 +6,12 @@ services:
     build: docker/node
     volumes:
       - ./frontend:/app
+      - "/app/node_modules"
     networks:
       - default
     ports:
       - '4200:4200'
+      - '49153:49153'
   web:
     container_name: todo-app-web
     image: nginx:latest

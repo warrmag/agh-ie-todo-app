@@ -14,6 +14,8 @@ WORKDIR /app
 # ADD NODE TO SUDOERS
 RUN usermod -aG sudo node && echo "node ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
+COPY . .
+
 RUN sudo chown -R node:node /app
 
 RUN yarn global add @angular/cli@latest
@@ -21,5 +23,5 @@ RUN yarn global add @angular/cli@latest
 USER node
 
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ng serve --host 0.0.0.0
-EXPOSE 4200
+CMD ["yarn", "start"]
+EXPOSE 4200 49153
