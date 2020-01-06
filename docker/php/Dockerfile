@@ -3,7 +3,7 @@ FROM php:7.4.0-fpm
 RUN apt-get update && \
     apt-get install --no-install-recommends --assume-yes --quiet ca-certificates curl git zip libzip-dev zlib1g-dev && \
     apt-get install --no-install-recommends --assume-yes --quiet libxrender1 libfontconfig1 libx11-dev libjpeg62 libxtst6 libpq-dev  && \
-    docker-php-ext-configure zip --with-libzip && \
+    docker-php-ext-configure zip && \
     docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql && \
     docker-php-ext-install zip mysqli pdo pdo_mysql pdo_pgsql opcache && \
     rm -rf /var/lib/apt/lists/*
