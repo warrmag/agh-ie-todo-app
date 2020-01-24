@@ -5,7 +5,11 @@ App should be fully containerized so all you need is Docker installed on your lo
 
 Just simply run: ``docker-compose up`` in main project directory
 
-after a while or log message 
+if it is your first run please don't use -d option to bring up project
+
+It can take a while
+
+We should expect message:
 
 ```
 todo-app-php | [21-Dec-2019 19:58:16] NOTICE: ready to handle connections
